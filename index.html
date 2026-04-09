@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduPay School Management</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <h1>EduPay School Management</h1>
+        <p>Manage students, attendance, and fees in one place.</p>
+      </div>
+      <button id="seedDataBtn" class="btn-secondary">Seed Demo Data</button>
+    </header>
+
+    <main class="layout">
+      <section class="card quick-stats">
+        <h2>Overview</h2>
+        <div class="stats-grid">
+          <article>
+            <h3 id="studentCount">0</h3>
+            <p>Total Students</p>
+          </article>
+          <article>
+            <h3 id="classCount">0</h3>
+            <p>Total Classes</p>
+          </article>
+          <article>
+            <h3 id="presentToday">0</h3>
+            <p>Present Today</p>
+          </article>
+          <article>
+            <h3 id="feesDue">$0</h3>
+            <p>Fees Due</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Add Student</h2>
+        <form id="studentForm" class="form-grid">
+          <label>
+            Full Name
+            <input type="text" name="name" required placeholder="e.g., Maya Johnson" />
+          </label>
+          <label>
+            Grade
+            <input type="text" name="grade" required placeholder="e.g., Grade 8" />
+          </label>
+          <label>
+            Guardian
+            <input type="text" name="guardian" required placeholder="e.g., Samuel Johnson" />
+          </label>
+          <label>
+            Monthly Fee (USD)
+            <input type="number" name="monthlyFee" min="0" required placeholder="e.g., 125" />
+          </label>
+          <button type="submit" class="btn-primary">Add Student</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Mark Attendance</h2>
+        <form id="attendanceForm" class="form-grid compact">
+          <label>
+            Student
+            <select name="studentId" id="attendanceStudent" required></select>
+          </label>
+          <label>
+            Status
+            <select name="status" required>
+              <option value="present">Present</option>
+              <option value="absent">Absent</option>
+              <option value="late">Late</option>
+            </select>
+          </label>
+          <button type="submit" class="btn-primary">Save Attendance</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Record Fee Payment</h2>
+        <form id="paymentForm" class="form-grid compact">
+          <label>
+            Student
+            <select name="studentId" id="paymentStudent" required></select>
+          </label>
+          <label>
+            Amount Paid (USD)
+            <input type="number" name="amount" min="0" required placeholder="e.g., 80" />
+          </label>
+          <button type="submit" class="btn-primary">Record Payment</button>
+        </form>
+      </section>
+
+      <section class="card table-card">
+        <div class="section-head">
+          <h2>Students</h2>
+          <input type="search" id="studentSearch" placeholder="Search by name or grade" />
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Grade</th>
+                <th>Guardian</th>
+                <th>Attendance Today</th>
+                <th>Fee Balance</th>
+              </tr>
+            </thead>
+            <tbody id="studentsTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <template id="studentRowTemplate">
+      <tr>
+        <td data-cell="name"></td>
+        <td data-cell="grade"></td>
+        <td data-cell="guardian"></td>
+        <td data-cell="attendance"></td>
+        <td data-cell="balance"></td>
+      </tr>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
